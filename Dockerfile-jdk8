@@ -13,9 +13,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     chmod a+x /usr/lib/libnumcpus.so && \
     rm -rf /tmp/*
 
-# Fix kill by OOM
-# # Config GC thread count equals CPU core
-# # Config Compiler thread count equals CPU core
+# 1, Avoid killed by OOM
+# 2, Config GC thread count equals CPU core
+# 3, Config Compiler thread count equals CPU core
+# 4, The Runtime.getRuntime().availableProcessors() will return _NUM_CPUS instead of host CPU cores
 ENV _JAVA_OPTIONS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:ParallelGCThreads=${CPU_CORE} -XX:CICompilerCount=${CPU_CORE}" \
     LD_PRELOAD="/usr/lib/libnumcpus.so" \
     _NUM_CPUS="${CPU_CORE}"
