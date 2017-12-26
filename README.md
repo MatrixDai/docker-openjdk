@@ -6,5 +6,5 @@ OpenJDK docker image wrapper
 JDK8
 
 ```
-docker build -t jdk --build-arg CPU_CORE=4 -f jdk8/Dockerfile .
+docker build -t jdk --build-arg CPU_CORE=4 -f Dockerfile-jdk8 .
 ```
